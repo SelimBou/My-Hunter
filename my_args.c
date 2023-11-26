@@ -21,6 +21,7 @@ void my_args(var *args)
     args->offset = 5;
     args->direction = 1;
     args->current_frame = 0;
+    args->x_floor = 0;
 }
 
 void my_rect(sfIntRect *rect)

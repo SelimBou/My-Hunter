@@ -28,6 +28,7 @@ typedef struct var_t {
     int offset;
     int direction;
     int current_frame;
+    int x_floor;
 }var;
 void my_hunter(sfRenderWindow *window, sfEvent event);
 void my_args(var *args);
