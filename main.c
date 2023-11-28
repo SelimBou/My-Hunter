@@ -6,11 +6,76 @@
 */
 
 #include "hunter.h"
+
+static int start_game2(sfRenderWindow *window, sfEvent event, var *args)
+{
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
+
+    if (mouse.x >= 1722 && mouse.x <= 1972) {
+        if (mouse.y >= 0 && mouse.y <= 100)
+            return 1;
+    }
+    return 0;
+}
+
+static void sprite_to_texture1(var *args)
+{
+    sfVector2f pos_boutton = {800, 400};
+    sfVector2f pos_rule = {800, 550};
+
+    sfSprite_setTexture(args->sprite, args->texture, sfTrue);
+    sfSprite_setTexture(args->button, args->texture2, sfTrue);
+    sfSprite_setPosition(args->button, pos_boutton);
+    sfSprite_setTexture(args->back2_s, args->back2_t, sfTrue);
+    sfSprite_setTexture(args->leave_s, args->leave_t, sfTrue);
+    sfSprite_setTexture(args->rules_s, args->rules_t, sfTrue);
+    sfSprite_setPosition(args->rules_s, pos_rule);
+}
+
+void destroy_all(sfRenderWindow *window, var *args)
+{
+    sfSprite_destroy(args->sprite);
+    sfTexture_destroy(args->texture);
+    sfSprite_destroy(args->button);
+    sfTexture_destroy(args->texture2);
+    sfSprite_destroy(args->floor_s);
+    sfTexture_destroy(args->floor_t);
+    sfSprite_destroy(args->back2_s);
+    sfTexture_destroy(args->back2_t);
+    sfSprite_destroy(args->player_s);
+    sfTexture_destroy(args->player_t);
+    sfSprite_destroy(args->viseur_s);
+    sfTexture_destroy(args->viseur_t);
+    sfSprite_destroy(args->rules_s);
+    sfTexture_destroy(args->rules_t);
+    sfRenderWindow_destroy(window);
+}
+
+static void rule_display(sfRenderWindow *window, var *args, sfEvent event)
+{
+    int code_retour = 0;
+    sfVector2f leave_pos = {1722, 0};
+
+    sfSprite_setPosition(args->leave_s, leave_pos);
+    while (sfRenderWindow_isOpen(window) && code_retour == 0) {
+        while (sfRenderWindow_pollEvent(window, &event))
+            window_display(window, event);
+        sfRenderWindow_clear(window, sfWhite);
+        sfRenderWindow_drawSprite(window, args->back2_s, NULL);
+        sfRenderWindow_drawSprite(window, args->leave_s, NULL);
+        if (event.type == sfEvtMouseButtonPressed) {
+            code_retour = start_game2(window, event, args);
+        }
+        sfRenderWindow_display(window);
+    }
+}
+
 static void game_display(sfRenderWindow *window, var *args)
 {
     sfRenderWindow_clear(window, sfWhite);
     sfRenderWindow_drawSprite(window, args->sprite, NULL);
     sfRenderWindow_drawSprite(window, args->button, NULL);
+    sfRenderWindow_drawSprite(window, args->rules_s, NULL);
     sfRenderWindow_display(window);
 }
 
@@ -20,20 +85,24 @@ void window_display(sfRenderWindow *window, sfEvent event)
         sfRenderWindow_close(window);
 }
 
-static void start_game(sfRenderWindow *window, sfEvent event)
-{
-    if (event.type == sfEvtMouseButtonPressed)
-        my_hunter(window, event);
-}
-
-void mouse_position(sfRenderWindow *window, sfEvent event)
+static void start_game(sfRenderWindow *window, sfEvent event, var *args)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
 
     if (mouse.x >= 837 && mouse.x <= 1025) {
         if (mouse.y >= 474 && mouse.y <= 525)
-            start_game(window, event);
+            my_hunter(window, event);
     }
+    if (mouse.x >= 766 && mouse.x <= 1027) {
+        if (mouse.y >= 540 && mouse.y <= 590)
+            rule_display(window, args, event);
+    }
+}
+
+void mouse_position(sfRenderWindow *window, sfEvent event, var *args)
+{
+    if (event.type == sfEvtMouseButtonPressed)
+        start_game(window, event, args);
 }
 
 int main(void)
@@ -41,20 +110,18 @@ int main(void)
     sfVideoMode mode = {1920, 1080, 32};
     sfEvent event;
     sfRenderWindow *window;
-    sfVector2f pos_boutton = {800, 400};
     var args;
 
     my_args(&args);
-    sfSprite_setTexture(args.sprite, args.texture, sfTrue);
-    sfSprite_setTexture(args.button, args.texture2, sfTrue);
-    sfSprite_setPosition(args.button, pos_boutton);
+    sprite_to_texture1(&args);
     window = sfRenderWindow_create(mode, "My hunter", sfResize | sfClose,
         NULL);
     while (sfRenderWindow_isOpen(window)) {
         while (sfRenderWindow_pollEvent(window, &event))
             window_display(window, event);
         game_display(window, &args);
-        mouse_position(window, event);
+        mouse_position(window, event, &args);
     }
+    destroy_all(window, &args);
     return 0;
 }

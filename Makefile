@@ -18,7 +18,7 @@ CSFML	=	-lcsfml-graphics -lcsfml-window -lcsfml-system
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	gcc $(OBJ) -o $(NAME) -I../includes $(CSFML)
+	gcc $(OBJ) -o $(NAME) -I../includes $(CSFML) -lm
 
 clean:
 	rm -f $(OBJ)
