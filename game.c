@@ -76,11 +76,10 @@ void move_rect(sfIntRect *rect, var *args, struct2 *vars)
 
 void my_hunter(sfRenderWindow *window, sfEvent event)
 {
-    var args;
     sfIntRect rect;
     struct2 vars = my_variables();
+    var args = my_args();
 
-    my_args(&args);
     my_rect(&rect);
     sprite_to_texture(&args);
     sfRenderWindow_setMouseCursorVisible(window, sfFalse);

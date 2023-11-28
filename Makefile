@@ -8,6 +8,11 @@
 SRC	=	main.c	\
 		game.c	\
 		my_args.c	\
+		my_printf.c	\
+		my_put_nbr.c	\
+		my_put_nbr_recursive.c	\
+		my_putchar.c	\
+		my_putstr.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

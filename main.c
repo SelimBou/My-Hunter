@@ -7,6 +7,21 @@
 
 #include "hunter.h"
 
+int game_description(char **argv)
+{
+    if (argv[1][1] == 'h') {
+        my_printf("Duck Hunt est un jeu classique de tir aux canards sorti");
+        my_printf(" en 1984 pour la NES. Les joueurs utilisent le pistolet");
+        my_printf(" NES Zapper pour abattre");
+        my_printf(" des canards volants. Le jeu propose des modes de tir aux");
+        my_printf(" canards et de tir aux");
+        my_printf(" pigeons d'argile. Le défi augmente avec la vitesse");
+        my_printf(" et l'angle des canards.");
+        my_printf(" Le jeu est célèbre pour son utilisation novatrice");
+        my_printf(" du pistolet et sa nostalgie associée à la NES.\n");
+    }
+}
+
 static int start_game2(sfRenderWindow *window, sfEvent event, var *args)
 {
     sfVector2i mouse = sfMouse_getPositionRenderWindow(window);
@@ -105,17 +120,19 @@ void mouse_position(sfRenderWindow *window, sfEvent event, var *args)
         start_game(window, event, args);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
     sfVideoMode mode = {1920, 1080, 32};
     sfEvent event;
     sfRenderWindow *window;
-    var args;
+    var args = my_args();
 
-    my_args(&args);
+    if (argc == 2 && argv[1][0] == '-') {
+        game_description(argv);
+        return 0;
+    }
     sprite_to_texture1(&args);
-    window = sfRenderWindow_create(mode, "My hunter", sfResize | sfClose,
-        NULL);
+    window = sfRenderWindow_create(mode, "MyHunter", sfResize | sfClose, NULL);
     while (sfRenderWindow_isOpen(window)) {
         while (sfRenderWindow_pollEvent(window, &event))
             window_display(window, event);

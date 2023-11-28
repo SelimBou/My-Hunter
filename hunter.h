@@ -46,7 +46,12 @@ typedef struct struct2 {
 
 void my_hunter(sfRenderWindow *window, sfEvent event);
 struct2 my_variables(void);
-void my_args(var *args);
+var my_args(void);
 void my_rect(sfIntRect *rect);
 void window_display(sfRenderWindow *window, sfEvent event);
+int my_put_nbr(int nb);
+int my_putstr(char *str);
+int my_put_nbr_recursive(int nb);
+char my_putchar(char c);
+int my_printf(const char *format, ...);
 #endif
