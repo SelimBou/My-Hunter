@@ -7,16 +7,25 @@
 
 #include "hunter.h"
 
+int lose_game(sfRenderWindow *window, mini *last)
+{
+    if (last->cpt_life == 0)
+        return 2;
+    return 0;
+}
+
 struct2 my_variables(void)
 {
     struct2 vars;
 
-    vars.max_value = 1920;
-    vars.offset = 40;
-    vars.current_frame = 0;
-    vars.x_canard = rand() % 300;
-    vars.y_canard = rand() % 300;
-    vars.clock = sfClock_create();
+    vars.leave_t = sfTexture_createFromFile("leave.png", NULL);
+    vars.leave_s = sfSprite_create();
+    vars.over_t = sfTexture_createFromFile("over.png", NULL);
+    vars.win_t = sfTexture_createFromFile("win.png", NULL);
+    vars.font =
+        sfFont_createFromFile("./Press_Start_2P/PressStart2P-Regular.ttf");
+    vars.font2 =
+        sfFont_createFromFile("./Press_Start_2P/PressStart2P-Regular.ttf");
     return vars;
 }
 
@@ -32,22 +41,42 @@ var my_args(void)
     args.rules_s = sfSprite_create();
     args.back2_t = sfTexture_createFromFile("rule1.png", NULL);
     args.back2_s = sfSprite_create();
-    args.floor_t = sfTexture_createFromFile("back.png", NULL);
-    args.floor_s = sfSprite_create();
     args.floor_t1 = sfTexture_createFromFile("back.png", NULL);
     args.floor_s1 = sfSprite_create();
-    args.player_t = sfTexture_createFromFile("duck.png", NULL);
-    args.player_s = sfSprite_create();
-    args.viseur_t = sfTexture_createFromFile("viseur.png", NULL);
-    args.viseur_s = sfSprite_create();
-    args.leave_t = sfTexture_createFromFile("leave.png", NULL);
-    args.leave_s = sfSprite_create();
+    return args;
 }
 
-void my_rect(sfIntRect *rect)
+sfIntRect my_rect(void)
 {
-    rect->top = 0;
-    rect->left = 0;
-    rect->width = 110;
-    rect->height = 110;
+    sfIntRect rect;
+
+    rect.top = 0;
+    rect.left = 0;
+    rect.width = 110;
+    rect.height = 110;
+    return rect;
+}
+
+mini my_var(void)
+{
+    mini last;
+
+    last.over_s = sfSprite_create();
+    last.win_s = sfSprite_create();
+    last.scoreText = sfText_create();
+    last.floor_t = sfTexture_createFromFile("back.png", NULL);
+    last.floor_s = sfSprite_create();
+    last.viseur_t = sfTexture_createFromFile("viseur.png", NULL);
+    last.viseur_s = sfSprite_create();
+    last.player_t = sfTexture_createFromFile("duck.png", NULL);
+    last.player_s = sfSprite_create();
+    last.clock = sfClock_create();
+    last.my_score = sfText_create();
+    last.score = 0;
+    last.code_retour = 0;
+    last.sco = int_to_str(last.score);
+    last.x_canard = rand() % 300;
+    last.y_canard = rand() % 300;
+    last.cpt_life = 3;
+    return last;
 }
