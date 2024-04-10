@@ -54,7 +54,7 @@ void move_floor(sfRenderWindow *window, mini *last, sfIntRect *rect)
 {
     sfVector2f canard_pos = {last->x_canard, last->y_canard};
 
-    last->x_canard = last->x_canard + 1;
+    last->x_canard = last->x_canard + 0.6;
     sfSprite_setPosition(last->player_s, canard_pos);
     if (last->x_canard > 1920) {
         last->cpt_life -= 1;

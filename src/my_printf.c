@@ -15,7 +15,6 @@ int verify_printf(char ltr, va_list args)
     int result = 0;
     char *str;
     char cara;
-    int nb;
 
     if (ltr == 's') {
         str = va_arg(args, char *);
@@ -25,11 +24,6 @@ int verify_printf(char ltr, va_list args)
         cara = va_arg(args, int);
         my_putchar(cara);
     }
-    if (ltr == 'd' || ltr == 'i') {
-        nb = va_arg(args, int);
-        my_put_nbr(nb);
-    }
-    return result;
 }
 
 int my_printf(const char *format, ...)

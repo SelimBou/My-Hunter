@@ -18,10 +18,10 @@ struct2 my_variables(void)
 {
     struct2 vars;
 
-    vars.leave_t = sfTexture_createFromFile("leave.png", NULL);
+    vars.leave_t = sfTexture_createFromFile("pics/leave.png", NULL);
     vars.leave_s = sfSprite_create();
-    vars.over_t = sfTexture_createFromFile("over.png", NULL);
-    vars.win_t = sfTexture_createFromFile("win.png", NULL);
+    vars.over_t = sfTexture_createFromFile("pics/over.png", NULL);
+    vars.win_t = sfTexture_createFromFile("pics/win.png", NULL);
     vars.font =
         sfFont_createFromFile("./Press_Start_2P/PressStart2P-Regular.ttf");
     vars.font2 =
@@ -33,15 +33,15 @@ var my_args(void)
 {
     var args;
 
-    args.texture = sfTexture_createFromFile("fond.jpg", NULL);
+    args.texture = sfTexture_createFromFile("pics/fond.jpg", NULL);
     args.sprite = sfSprite_create();
-    args.texture2 = sfTexture_createFromFile("start.png", NULL);
+    args.texture2 = sfTexture_createFromFile("pics/start.png", NULL);
     args.button = sfSprite_create();
-    args.rules_t = sfTexture_createFromFile("rule.png", NULL);
+    args.rules_t = sfTexture_createFromFile("pics/rule.png", NULL);
     args.rules_s = sfSprite_create();
-    args.back2_t = sfTexture_createFromFile("rule1.png", NULL);
+    args.back2_t = sfTexture_createFromFile("pics/rule1.png", NULL);
     args.back2_s = sfSprite_create();
-    args.floor_t1 = sfTexture_createFromFile("back.png", NULL);
+    args.floor_t1 = sfTexture_createFromFile("pics/back.png", NULL);
     args.floor_s1 = sfSprite_create();
     return args;
 }
@@ -64,11 +64,11 @@ mini my_var(void)
     last.over_s = sfSprite_create();
     last.win_s = sfSprite_create();
     last.scoreText = sfText_create();
-    last.floor_t = sfTexture_createFromFile("back.png", NULL);
+    last.floor_t = sfTexture_createFromFile("pics/back.png", NULL);
     last.floor_s = sfSprite_create();
-    last.viseur_t = sfTexture_createFromFile("viseur.png", NULL);
+    last.viseur_t = sfTexture_createFromFile("pics/viseur.png", NULL);
     last.viseur_s = sfSprite_create();
-    last.player_t = sfTexture_createFromFile("duck.png", NULL);
+    last.player_t = sfTexture_createFromFile("pics/duck.png", NULL);
     last.player_s = sfSprite_create();
     last.clock = sfClock_create();
     last.my_score = sfText_create();
