@@ -5,17 +5,17 @@
 ## Makefile
 ##
 
-SRC	=	main.c	\
-		game.c	\
-		my_args.c	\
-		return.c	\
-		my_printf.c	\
-		my_put_nbr.c	\
-		my_put_nbr_recursive.c	\
-		my_putchar.c	\
-		int_to_str.c	\
-		my_putstr.c	\
-		cases.c	\
+SRC	=	src/main.c	\
+		src/game.c	\
+		src/my_args.c	\
+		src/return.c	\
+		src/my_printf.c	\
+		src/my_put_nbr.c	\
+		src/my_put_nbr_recursive.c	\
+		src/my_putchar.c	\
+		src/int_to_str.c	\
+		src/my_putstr.c	\
+		src/cases.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
